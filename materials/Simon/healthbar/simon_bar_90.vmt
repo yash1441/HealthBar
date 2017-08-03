@@ -1,0 +1,5 @@
+"UnlitGeneric"
+{
+	"$basetexture" "Simon/healthbar/simon_bar_90"
+	"$translucent" "1"
+}
