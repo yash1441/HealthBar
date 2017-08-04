@@ -4,7 +4,7 @@
 
 #pragma semicolon 1
 
-#define PLUGIN_VERSION "2.0"
+#define PLUGIN_VERSION "2.1"
 
 int barHealth[MAXPLAYERS+1][10];
 bool shouldShow[2048];
@@ -23,6 +23,20 @@ public void OnPluginStart()
 {
 	CreateConVar("hb_version", PLUGIN_VERSION, "HealthBar", FCVAR_SPONLY | FCVAR_DONTRECORD | FCVAR_NOTIFY);
 	HookEvent("player_spawn", OnPlayerSpawn);
+}
+
+public void OnMapStart()
+{
+	for(new i = 10; i <= 100; i += 10)
+	{
+		char full_path_vmt[64];
+		Format(full_path_vmt, sizeof(full_path_vmt), "materials/Simon/healthbar/simon_bar_%d.vmt");
+		char full_path_vtf[64];
+		Format(full_path_vtf, sizeof(full_path_vtf), "materials/Simon/healthbar/simon_bar_%d.vtf");
+		AddFileToDownloadsTable(full_path_vmt);
+		AddFileToDownloadsTable(full_path_vtf);
+		PrecacheModel(full_path_vtf);
+	}
 }
 
 public Action OnPlayerSpawn(Handle event, const char[] name, bool dontBroadcast)
